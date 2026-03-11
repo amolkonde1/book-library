@@ -38,12 +38,20 @@ Generate protobuf:
 
 python -m grpc_tools.protoc -I proto --python_out=. --grpc_python_out=. proto/library.proto
 
-Run server:
+### Run Backend server:
 
-python app/main.py
+python -m app.main
 
 Server:
 localhost:50051
 
 Metrics:
 http://localhost:8000/metrics
+
+### Running Frontend
+
+cd frontend/library-ui
+
+npm install
+
+npm run dev
