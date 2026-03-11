@@ -1,5 +1,5 @@
 
-# Library Management Service (Staff Level)
+# Library Management Service
 
 Tech Stack:
 - Python
