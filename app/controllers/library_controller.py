@@ -7,6 +7,7 @@ from app.repositories.book_repository import BookRepository
 from app.repositories.member_repository import MemberRepository
 from app.repositories.borrow_repository import BorrowRepository
 from app.services.library_service import LibraryService
+# from app.observability.metrics import borrow_requests_total
 
 class LibraryController(library_pb2_grpc.LibraryServiceServicer):
 
@@ -70,9 +71,10 @@ class LibraryController(library_pb2_grpc.LibraryServiceServicer):
         )
 
     def BorrowBook(self, request, context):
+        # borrow_requests_total.inc()
+
         service = self._service()
         record = service.borrow_book(request.member_id, request.book_id)
-
         return library_pb2.BorrowResponse(
             record=library_pb2.BorrowRecord(
                 id=record.id,
