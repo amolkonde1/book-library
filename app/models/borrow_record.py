@@ -1,7 +1,7 @@
 
 import uuid
-from sqlalchemy import Column, String, DateTime
 from datetime import datetime
+from sqlalchemy import Column, String, DateTime
 from app.db.base import Base
 
 class BorrowRecord(Base):

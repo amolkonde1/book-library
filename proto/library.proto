@@ -24,26 +24,15 @@ message Book {
   int32 available_copies = 6;
 }
 
-message Member {
-  string id = 1;
-  string name = 2;
-  string email = 3;
-  string phone = 4;
-}
-
-message BorrowRecord {
-  string id = 1;
-  string book_id = 2;
-  string member_id = 3;
-  string status = 4;
-  string due_date = 5;
-}
-
 message CreateBookRequest {
   string title = 1;
   string author = 2;
   string isbn = 3;
   int32 total_copies = 4;
+}
+
+message BookResponse {
+  Book book = 1;
 }
 
 message ListBooksRequest {
@@ -61,33 +50,45 @@ message CreateMemberRequest {
   string phone = 3;
 }
 
-message BorrowBookRequest {
-  string member_id = 1;
-  string book_id = 2;
-}
-
-message ReturnBookRequest {
-  string borrow_id = 1;
-}
-
-message MemberBorrowQuery {
-  string member_id = 1;
-}
-
-message BookResponse {
-  Book book = 1;
+message Member {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
 }
 
 message MemberResponse {
   Member member = 1;
 }
 
+message BorrowBookRequest {
+  string member_id = 1;
+  string book_id = 2;
+}
+
 message BorrowResponse {
-  BorrowRecord record = 1;
+  string borrow_id = 1;
+  string due_date = 2;
+}
+
+message ReturnBookRequest {
+  string borrow_id = 1;
 }
 
 message ReturnResponse {
   string message = 1;
+}
+
+message MemberBorrowQuery {
+  string member_id = 1;
+}
+
+message BorrowRecord {
+  string id = 1;
+  string member_id = 2;
+  string book_id = 3;
+  string status = 4;
+  string due_date = 5;
 }
 
 message BorrowListResponse {

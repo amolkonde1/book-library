@@ -1,14 +1,14 @@
 
 import grpc
 from concurrent import futures
+from prometheus_client import start_http_server
 
 import library_pb2_grpc
 from app.controllers.library_controller import LibraryController
-# from prometheus_client import start_http_server
 
 def serve():
 
-    # start_http_server(8000)
+    start_http_server(8000)
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
@@ -20,7 +20,8 @@ def serve():
     server.add_insecure_port("[::]:50051")
     server.start()
 
-    print("Library gRPC server running on port 50051")
+    print("gRPC server running on port 50051")
+    print("Metrics at http://localhost:8000/metrics")
 
     server.wait_for_termination()
 

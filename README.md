@@ -1,91 +1,49 @@
 
-# Book Library Service
+# Library Management Service (Staff Level)
 
-This service manages:
+Tech Stack:
+- Python
+- gRPC + Protocol Buffers
+- PostgreSQL
+- SQLAlchemy
+- Prometheus Metrics
 
-- Books
-- Members
-- Borrow/Return operations
+Architecture:
 
-Tech stack:
+Controller → Service → Repository → Database
 
-Python
-gRPC + Protocol Buffers
-PostgreSQL
-SQLAlchemy
-Prometheus metrics
+Features:
 
----
+- Borrow / Return workflow
+- UUID identifiers
+- Pagination support
+- Due date tracking
+- Structured logging
+- Prometheus observability
+- Docker database setup
 
-# Features
-
-Clean Architecture
-
-Controller → Service → Repository
-
-Transaction-aware borrow logic
-
-Due date tracking
-
-Pagination support
-
-Metrics scaffold
-
-Docker database setup
-
----
-
-# Setup
-
-## Install dependencies
+Setup:
 
 pip install -r requirements.txt
 
-## Create database
+Create DB:
 
 CREATE DATABASE library_db;
 
-Run schema
+Run schema:
 
 psql -d library_db -f db/schema.sql
 
----
-
-# Generate gRPC Code
+Generate protobuf:
 
 python -m grpc_tools.protoc -I proto --python_out=. --grpc_python_out=. proto/library.proto
 
-Generated:
-
-library_pb2.py
-library_pb2_grpc.py
-
----
-
-# Run Application
+Run server:
 
 python app/main.py
 
-Server runs at
-
+Server:
 localhost:50051
 
----
-
-# Test
-
-grpcurl -plaintext localhost:50051 list
-
----
-
-# Architecture
-
-Controller Layer → gRPC transport
-
-Service Layer → business rules
-
-Repository Layer → database access
-
-Observability → Prometheus metrics
-
----
+Metrics:
+http://localhost:8000/metrics

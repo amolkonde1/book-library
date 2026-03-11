@@ -26,6 +26,7 @@ class LibraryService:
         return self.member_repo.create(member)
 
     def borrow_book(self, member_id, book_id):
+
         book = self.book_repo.get(book_id)
 
         if not book:
@@ -34,7 +35,6 @@ class LibraryService:
         if book.available_copies <= 0:
             raise Exception("Book unavailable")
 
-        # reduce inventory
         book.available_copies -= 1
         self.book_repo.commit()
 
@@ -49,6 +49,7 @@ class LibraryService:
 
     def return_book(self, borrow_id):
         record = self.borrow_repo.get(borrow_id)
+
         if not record:
             raise Exception("Borrow record not found")
 

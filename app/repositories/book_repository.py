@@ -13,18 +13,17 @@ class BookRepository:
         self.db.refresh(book)
         return book
 
+    def get(self, book_id):
+        return self.db.query(Book).filter(Book.id == book_id).first()
+
     def get_for_update(self, book_id):
-        # transaction safe row lock
         return self.db.execute(
             text("SELECT * FROM books WHERE id = :id FOR UPDATE"),
             {"id": book_id}
         ).fetchone()
 
-    def get(self, book_id):
-        return self.db.query(Book).filter(Book.id == book_id).first()
-
     def list(self, page, page_size):
-        return self.db.query(Book).offset(page * page_size).limit(page_size).all()
+        return self.db.query(Book).offset(page*page_size).limit(page_size).all()
 
     def commit(self):
         self.db.commit()

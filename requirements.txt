@@ -3,5 +3,5 @@ grpcio
 grpcio-tools
 sqlalchemy
 psycopg2-binary
-pytest
 prometheus-client
+pytest
